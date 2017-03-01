@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+  <link rel="stylesheet" href="app.css" />
+</head>
+
+<body ng-app="MyApp" layout="column" ng-controller="UserController as uk">
+
+  <md-toolbar layout="row">
+    <md-button class="menu" ng-click="uk.toggleList()" hide-gt-sm>
+      <md-icon md-svg-icon="menu"></md-icon>
+    </md-button>
+    <h1>Angular Material Starter App</h1>
+  </md-toolbar>
+
+  <div class="conttainer" layout="row" flex>
+    <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" class="md-whiteframe-4dp" md-component-id='left'>
+      <md-list>
+        <md-list-item ng-repeat="u in uk.users ">
+          <md-button ng-click="uk.selectUser(u)">
+            <md-icon md-svg-src="{{u.avatar}}" class="avatar"></md-icon>
+            {{u.name}}
+          </md-button>
+        </md-list-item>
+      </md-list>
+    </md-sidenav>
+    <md-content id="content" flex>
+      <md-icon md-svg-src="{{uk.selected.avatar}}" class="avatar"></md-icon>
+      <h2>{{uk.selected.name}}</h2>
+      <p>{{uk.selected.content}}</p>
+
+      <md-button class="share" md-no-ink aria-label="share" ng-click="uk.share(uk.selected)">
+         <md-icon md-svg-icon="share"></md-icon>     
+      </md-button>
+    </md-content>
+  </div>
+
+
+
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-aria/angular-aria.js"></script>
+  <script src="bower_components/angular-material/angular-material.js"></script>
+  <script src="Users.js"></script>
+  <script src="UserService.js"></script>
+  <script src="UserController.js"></script>
+  <script>
+    angular.module('MyApp', ['ngMaterial', 'users'])
+      .config(function ($mdIconProvider, $mdThemingProvider) {
+        $mdIconProvider.defaultIconSet('./svg/avatars.svg', 128);
+        $mdIconProvider.icon('share','./svg/share.svg', 24);
+        $mdIconProvider.icon('menu','./svg/menu.svg',24);
+
+        $mdThemingProvider.theme('default')
+                    .primaryPalette('brown')
+                    .accentPalette('red');
+      });
+  </script>
+</body>
+
+</html>
