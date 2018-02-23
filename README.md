@@ -2,6 +2,7 @@
 
 ##To start project:##
   - $ npm i -g local-web-server
+  - $ npm i -g bower
   - $ bower i
-  - $ ws 
+  - $ ws
   - launch browser with url from ws
